@@ -3,11 +3,10 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-mongoose.connect("mongodb+srv://bobbymubinm:mubin123123@cluster0.qwsz1.mongodb.net/").then(()=>console.log('Connection Established'))
-.catch((error) => console.log('Error in Connection'));
-
 const app = express()
-const PORT = process.env.PORT || 5000;
+
+require('dotenv').config()
+const PORT = process.env.PORT;
 
 app.use(
     cors({
@@ -23,6 +22,8 @@ app.use(
         crtedentials : true
     })
 );
+
+require('./db/connection');
 
 app.use(cookieParser());
 app.use(express.json());
