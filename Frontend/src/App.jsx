@@ -15,14 +15,25 @@ import RentCheckout from "./pages/renting-view/Checkout";
 import RentAccount from "./pages/renting-view/Accountpage";
 import CheckAuth from "./components/common/Check-auth";
 import Unauth from "./pages/unauth-page/Index";
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuth } from "./store/auth-slice";
+import { useEffect } from "react";
+import { Skeleton } from "./components/ui/skeleton";
 
 function App() {
 
-  const isAuthenticated = true;
-  const user = {
-    name : "Mubin",
-    role : "user"
-  };
+  const { user, isAuthenticated, isLoading } = useSelector
+    (state => state.auth
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+
+  console.log(isLoading, user);
     
 
   return (
@@ -54,7 +65,7 @@ function App() {
         <Route path="features" element={<AdminFeatures/>}/>
       </Route>
 
-      <Route path="/rent" element={
+      <Route path="/shop" element={
         <CheckAuth isAuthenticated={isAuthenticated} user={user}>
          <RentLayout/>
         </CheckAuth>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import RentHeader from './Header'
+import Footer from './Footer'
 
 const RentLayout = () => {
   return (
@@ -10,7 +11,9 @@ const RentLayout = () => {
 
         <main className="flex flex-col w-full">
             <Outlet/>
-        </main>     
+        </main>   
+
+       <Footer/>
     </div>
   )
 }
